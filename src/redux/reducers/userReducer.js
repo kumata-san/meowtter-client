@@ -3,8 +3,8 @@ import {
   SET_AUTHENTICATED,
   SET_UNAUTHENTICATED,
   LOADING_USER,
-  LIKE_SCREAM,
-  UNLIKE_SCREAM,
+  LIKE_MEOW,
+  UNLIKE_MEOW,
   MARK_NOTIFICATIONS_READ
 } from '../types';
 
@@ -36,22 +36,22 @@ export default function(state = initialState, action) {
         ...state,
         loading: true
       };
-    case LIKE_SCREAM:
+    case LIKE_MEOW:
       return {
         ...state,
         likes: [
           ...state.likes,
           {
             userHandle: state.credentials.handle,
-            screamId: action.payload.screamId
+            meowId: action.payload.meowId
           }
         ]
       };
-    case UNLIKE_SCREAM:
+    case UNLIKE_MEOW:
       return {
         ...state,
         likes: state.likes.filter(
-          (like) => like.screamId !== action.payload.screamId
+          (like) => like.meowId !== action.payload.meowId
         )
       };
     case MARK_NOTIFICATIONS_READ:

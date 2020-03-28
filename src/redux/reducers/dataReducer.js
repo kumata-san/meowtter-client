@@ -1,17 +1,17 @@
 import {
-  SET_SCREAMS,
-  LIKE_SCREAM,
-  UNLIKE_SCREAM,
+  SET_MEOWS,
+  LIKE_MEOW,
+  UNLIKE_MEOW,
   LOADING_DATA,
-  DELETE_SCREAM,
-  POST_SCREAM,
-  SET_SCREAM,
+  DELETE_MEOW,
+  POST_MEOW,
+  SET_MEOW,
   SUBMIT_COMMENT
 } from '../types';
 
 const initialState = {
-  screams: [],
-  scream: {},
+  meows: [],
+  meow: {},
   loading: false
 };
 
@@ -22,48 +22,48 @@ export default function(state = initialState, action) {
         ...state,
         loading: true
       };
-    case SET_SCREAMS:
+    case SET_MEOWS:
       return {
         ...state,
-        screams: action.payload,
+        meows: action.payload,
         loading: false
       };
-    case SET_SCREAM:
+    case SET_MEOW:
       return {
         ...state,
-        scream: action.payload
+        meow: action.payload
       };
-    case LIKE_SCREAM:
-    case UNLIKE_SCREAM:
-      let index = state.screams.findIndex(
-        (scream) => scream.screamId === action.payload.screamId
+    case LIKE_MEOW:
+    case UNLIKE_MEOW:
+      let index = state.meows.findIndex(
+        (meow) => meow.meowId === action.payload.meowId
       );
-      state.screams[index] = action.payload;
-      if (state.scream.screamId === action.payload.screamId) {
-        state.scream = action.payload;
+      state.meows[index] = action.payload;
+      if (state.meow.meowId === action.payload.meowId) {
+        state.meow = action.payload;
       }
       return {
         ...state
       };
-    case DELETE_SCREAM:
-      index = state.screams.findIndex(
-        (scream) => scream.screamId === action.payload
+    case DELETE_MEOW:
+      index = state.meows.findIndex(
+        (meow) => meow.meowId === action.payload
       );
-      state.screams.splice(index, 1);
+      state.meows.splice(index, 1);
       return {
         ...state
       };
-    case POST_SCREAM:
+    case POST_MEOW:
       return {
         ...state,
-        screams: [action.payload, ...state.screams]
+        meows: [action.payload, ...state.meows]
       };
     case SUBMIT_COMMENT:
       return {
         ...state,
-        scream: {
-          ...state.scream,
-          comments: [action.payload, ...state.scream.comments]
+        meow: {
+          ...state.meow,
+          comments: [action.payload, ...state.meow.comments]
         }
       };
     default:

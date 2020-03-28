@@ -33,7 +33,7 @@ class CommentForm extends Component {
   };
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.submitComment(this.props.screamId, { body: this.state.body });
+    this.props.submitComment(this.props.meowId, { body: this.state.body });
   };
 
   render() {
@@ -46,7 +46,7 @@ class CommentForm extends Component {
           <TextField
             name="body"
             type="text"
-            label="Comment on scream"
+            label="Comment on meow"
             error={errors.comment ? true : false}
             helperText={errors.comment}
             value={this.state.body}
@@ -74,7 +74,7 @@ CommentForm.propTypes = {
   submitComment: PropTypes.func.isRequired,
   UI: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
-  screamId: PropTypes.string.isRequired,
+  meowId: PropTypes.string.isRequired,
   authenticated: PropTypes.bool.isRequired
 };
 

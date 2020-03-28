@@ -13,7 +13,7 @@ import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 // Redux stuff
 import { connect } from 'react-redux';
-import { postScream, clearErrors } from '../../redux/actions/dataActions';
+import { postMeow, clearErrors } from '../../redux/actions/dataActions';
 
 const styles = (theme) => ({
   ...theme,
@@ -32,7 +32,7 @@ const styles = (theme) => ({
   }
 });
 
-class PostScream extends Component {
+class PostMeow extends Component {
   state = {
     open: false,
     body: '',
@@ -60,7 +60,7 @@ class PostScream extends Component {
   };
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.postScream({ body: this.state.body });
+    this.props.postMeow({ body: this.state.body });
   };
   render() {
     const { errors } = this.state;
@@ -70,7 +70,7 @@ class PostScream extends Component {
     } = this.props;
     return (
       <Fragment>
-        <MyButton onClick={this.handleOpen} tip="Post a Scream!">
+        <MyButton onClick={this.handleOpen} tip="Post a Meow!">
           <AddIcon />
         </MyButton>
         <Dialog
@@ -86,16 +86,16 @@ class PostScream extends Component {
           >
             <CloseIcon />
           </MyButton>
-          <DialogTitle>Post a new scream</DialogTitle>
+          <DialogTitle>Post a new meow</DialogTitle>
           <DialogContent>
             <form onSubmit={this.handleSubmit}>
               <TextField
                 name="body"
                 type="text"
-                label="SCREAM!!"
+                label="MEOW!!"
                 multiline
                 rows="3"
-                placeholder="Scream at your fellow apes"
+                placeholder="Meow at your fellow apes"
                 error={errors.body ? true : false}
                 helperText={errors.body}
                 className={classes.textField}
@@ -125,8 +125,8 @@ class PostScream extends Component {
   }
 }
 
-PostScream.propTypes = {
-  postScream: PropTypes.func.isRequired,
+PostMeow.propTypes = {
+  postMeow: PropTypes.func.isRequired,
   clearErrors: PropTypes.func.isRequired,
   UI: PropTypes.object.isRequired
 };
@@ -137,5 +137,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(
   mapStateToProps,
-  { postScream, clearErrors }
-)(withStyles(styles)(PostScream));
+  { postMeow, clearErrors }
+)(withStyles(styles)(PostMeow));

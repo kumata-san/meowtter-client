@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import Scream from '../components/scream/Scream';
+import Meow from '../components/meow/Meow';
 import StaticProfile from '../components/profile/StaticProfile';
 import Grid from '@material-ui/core/Grid';
 
-import ScreamSkeleton from '../util/ScreamSkeleton';
+import MeowSkeleton from '../util/MeowSkeleton';
 import ProfileSkeleton from '../util/ProfileSkeleton';
 
 import { connect } from 'react-redux';
@@ -14,13 +14,13 @@ import { getUserData } from '../redux/actions/dataActions';
 class user extends Component {
   state = {
     profile: null,
-    screamIdParam: null
+    meowIdParam: null
   };
   componentDidMount() {
     const handle = this.props.match.params.handle;
-    const screamId = this.props.match.params.screamId;
+    const meowId = this.props.match.params.meowId;
 
-    if (screamId) this.setState({ screamIdParam: screamId });
+    if (meowId) this.setState({ meowIdParam: meowId });
 
     this.props.getUserData(handle);
     axios
@@ -33,27 +33,27 @@ class user extends Component {
       .catch((err) => console.log(err));
   }
   render() {
-    const { screams, loading } = this.props.data;
-    const { screamIdParam } = this.state;
+    const { meows, loading } = this.props.data;
+    const { meowIdParam } = this.state;
 
-    const screamsMarkup = loading ? (
-      <ScreamSkeleton />
-    ) : screams === null ? (
-      <p>No screams from this user</p>
-    ) : !screamIdParam ? (
-      screams.map((scream) => <Scream key={scream.screamId} scream={scream} />)
+    const meowsMarkup = loading ? (
+      <MeowSkeleton />
+    ) : meows === null ? (
+      <p>No meows from this user</p>
+    ) : !meowIdParam ? (
+      meows.map((meow) => <Meow key={meow.meowId} meow={meow} />)
     ) : (
-      screams.map((scream) => {
-        if (scream.screamId !== screamIdParam)
-          return <Scream key={scream.screamId} scream={scream} />;
-        else return <Scream key={scream.screamId} scream={scream} openDialog />;
+      meows.map((meow) => {
+        if (meow.meowId !== meowIdParam)
+          return <Meow key={meow.meowId} meow={meow} />;
+        else return <Meow key={meow.meowId} meow={meow} openDialog />;
       })
     );
 
     return (
       <Grid container spacing={16}>
         <Grid item sm={8} xs={12}>
-          {screamsMarkup}
+          {meowsMarkup}
         </Grid>
         <Grid item sm={4} xs={12}>
           {this.state.profile === null ? (

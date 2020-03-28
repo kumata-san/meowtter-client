@@ -54,7 +54,7 @@ class App extends Component {
                 <Route exact path="/users/:handle" component={user} />
                 <Route
                   exact
-                  path="/users/:handle/scream/:screamId"
+                  path="/users/:handle/meow/:meowId"
                   component={user}
                 />
               </Switch>

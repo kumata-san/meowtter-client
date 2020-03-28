@@ -19,7 +19,7 @@ import UnfoldMore from '@material-ui/icons/UnfoldMore';
 import ChatIcon from '@material-ui/icons/Chat';
 // Redux stuff
 import { connect } from 'react-redux';
-import { getScream, clearErrors } from '../../redux/actions/dataActions';
+import { getMeow, clearErrors } from '../../redux/actions/dataActions';
 
 const styles = (theme) => ({
   ...theme,
@@ -47,7 +47,7 @@ const styles = (theme) => ({
   }
 });
 
-class ScreamDialog extends Component {
+class MeowDialog extends Component {
   state = {
     open: false,
     oldPath: '',
@@ -61,15 +61,15 @@ class ScreamDialog extends Component {
   handleOpen = () => {
     let oldPath = window.location.pathname;
 
-    const { userHandle, screamId } = this.props;
-    const newPath = `/users/${userHandle}/scream/${screamId}`;
+    const { userHandle, meowId } = this.props;
+    const newPath = `/users/${userHandle}/meow/${meowId}`;
 
     if (oldPath === newPath) oldPath = `/users/${userHandle}`;
 
     window.history.pushState(null, null, newPath);
 
     this.setState({ open: true, oldPath, newPath });
-    this.props.getScream(this.props.screamId);
+    this.props.getMeow(this.props.meowId);
   };
   handleClose = () => {
     window.history.pushState(null, null, this.state.oldPath);
@@ -80,8 +80,8 @@ class ScreamDialog extends Component {
   render() {
     const {
       classes,
-      scream: {
-        screamId,
+      meow: {
+        meowId,
         body,
         createdAt,
         likeCount,
@@ -117,7 +117,7 @@ class ScreamDialog extends Component {
           </Typography>
           <hr className={classes.invisibleSeparator} />
           <Typography variant="body1">{body}</Typography>
-          <LikeButton screamId={screamId} />
+          <LikeButton meowId={meowId} />
           <span>{likeCount} likes</span>
           <MyButton tip="comments">
             <ChatIcon color="primary" />
@@ -125,7 +125,7 @@ class ScreamDialog extends Component {
           <span>{commentCount} comments</span>
         </Grid>
         <hr className={classes.visibleSeparator} />
-        <CommentForm screamId={screamId} />
+        <CommentForm meowId={meowId} />
         <Comments comments={comments} />
       </Grid>
     );
@@ -133,7 +133,7 @@ class ScreamDialog extends Component {
       <Fragment>
         <MyButton
           onClick={this.handleOpen}
-          tip="Expand scream"
+          tip="Expand meow"
           tipClassName={classes.expandButton}
         >
           <UnfoldMore color="primary" />
@@ -160,26 +160,26 @@ class ScreamDialog extends Component {
   }
 }
 
-ScreamDialog.propTypes = {
+MeowDialog.propTypes = {
   clearErrors: PropTypes.func.isRequired,
-  getScream: PropTypes.func.isRequired,
-  screamId: PropTypes.string.isRequired,
+  getMeow: PropTypes.func.isRequired,
+  meowId: PropTypes.string.isRequired,
   userHandle: PropTypes.string.isRequired,
-  scream: PropTypes.object.isRequired,
+  meow: PropTypes.object.isRequired,
   UI: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  scream: state.data.scream,
+  meow: state.data.meow,
   UI: state.UI
 });
 
 const mapActionsToProps = {
-  getScream,
+  getMeow,
   clearErrors
 };
 
 export default connect(
   mapStateToProps,
   mapActionsToProps
-)(withStyles(styles)(ScreamDialog));
+)(withStyles(styles)(MeowDialog));
